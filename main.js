@@ -60,7 +60,15 @@ ipcMain.handle('get', () => {
   console.log(screen)
   const displays = screen?.getAllDisplays();
    console.log(displays)
-   return displays
+
+   const resultMap = displays.map((item, index) => ({
+    index:index, //indice del array se refiere a la posición del item
+    id: item.id, //id de la ventana
+    width: item.bounds.width,
+    height: item.bounds.height
+   }))
+
+   return resultMap
 });
 
 ipcMain.handle('add', (event, obj) => {

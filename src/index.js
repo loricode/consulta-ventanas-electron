@@ -26,7 +26,38 @@ window.onload = function() {
 
 async function renderGetProducts() {
   const result = await ipcRenderer.invoke('get')   
-  console.log("ipcRen", result)
+ 
+
+  let template = ""
+
+  result.forEach(element => {
+      template+=`
+         <tr>
+            <td>${element.id}</td>
+            <td>${element.width}</td>
+            <td>${element.height}</td>
+            <td>
+              <button class="btn btn-danger"
+                value="${element.id}"
+                > 
+                delete
+              </button>
+             </td>
+             
+             <td>
+               <button class="btn btn-info"   
+                 id="btnedit"
+                 value="${element.id}"> 
+                edit
+              </button>
+           
+            </td>
+         </tr>
+      ` 
+   });
+     
+   mylist.innerHTML = template 
+
 }
 
  
